@@ -1,0 +1,9 @@
+CREATE TABLE product_order (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  product_id BIGINT NOT NULL,
+  num BIGINT NOT NULL DEFAULT 0,
+  total_price DECIMAL NOT NULL,
+  created_at DATETIME,
+  updated_at DATETIME,
+  PRIMARY KEY (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

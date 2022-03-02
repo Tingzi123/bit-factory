@@ -1,0 +1,19 @@
+version: "3.0"
+services:
+  mysql:
+    image: mysql
+    ports:
+    - 3307:3306
+    environment:
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: bit_factory
+    volumes:
+       - ./data:/var/lib/mysql
+
+  redis:
+    image: redis
+    container_name: bit_redis
+    ports:
+    - 6379:6379
