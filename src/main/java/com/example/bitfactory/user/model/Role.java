@@ -29,6 +29,11 @@ public class Role implements GrantedAuthority, Serializable {
     private String roleName;
     private String roleDesc;
 
+    public Role(String roleName, String roleDesc) {
+        this.roleName = roleName;
+        this.roleDesc = roleDesc;
+    }
+
     @JsonIgnore
     @Override
     public String getAuthority() {

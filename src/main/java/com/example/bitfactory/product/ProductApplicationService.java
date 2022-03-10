@@ -38,9 +38,9 @@ public class ProductApplicationService {
 
     public void updateProductStock(Long id, Long num) {
         var product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product is not found!"));
-       /* if (product.getStock() < num) {
+        if (product.getStock() < num) {
             throw new RuntimeException("Out of stock error");
-        }*/
+        }
         product.updateStock(product.getStock() - num);
         productRepository.save(product);
     }

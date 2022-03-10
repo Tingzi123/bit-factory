@@ -37,11 +37,19 @@ public class User implements UserDetails, Serializable {
     private String username;
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
-    @JoinTable(name="user_roles",
-            joinColumns=@JoinColumn(name="user_id"),
-            inverseJoinColumns=@JoinColumn(name="role_id"))
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    //EAGER 饿汉
+    //LAZY  懒汉
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
+
+    public User(String username, String password, List<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
 
     @JsonIgnore
     @Override
@@ -61,6 +69,7 @@ public class User implements UserDetails, Serializable {
 
     /**
      * 账户是否没有过期
+     *
      * @return
      */
     @JsonIgnore
@@ -71,6 +80,7 @@ public class User implements UserDetails, Serializable {
 
     /**
      * 账户是否没有被锁定
+     *
      * @return
      */
     @JsonIgnore
@@ -81,6 +91,7 @@ public class User implements UserDetails, Serializable {
 
     /**
      * 密码是否没有过期
+     *
      * @return
      */
     @JsonIgnore
@@ -91,6 +102,7 @@ public class User implements UserDetails, Serializable {
 
     /**
      * 账户是否可用
+     *
      * @return
      */
     @JsonIgnore

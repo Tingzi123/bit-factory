@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(String username, String password) {
-        UserDetails userDetails = loadUserByUsername(username);
+        UserDetails userDetails = loadUserByUsername(username);//username/password
         if (!password.equals(userDetails.getPassword())) {
             throw new BadRequestException("密码错误！");
         }
@@ -47,6 +47,8 @@ public class UserServiceImpl implements UserService {
                 .setExpiration(new Date(System.currentTimeMillis() + 10 * 60 * 1000))//过期时间
                 .signWith(SignatureAlgorithm.HS512, "cctv@123")//加密算法、密钥
                 .compact();
+
+        //2、非对称加密算法
     }
 
     @Override
@@ -54,6 +56,6 @@ public class UserServiceImpl implements UserService {
         Claims claims = Jwts.parser().setSigningKey("cctv@123").parseClaimsJws(authorization.replace("Bearer", ""))
                 .getBody();
         String username = claims.getSubject();//获取当前登录用户名
-        redisDao.setKey(username, authorization);
+        redisDao.setKey(authorization, username);
     }
 }

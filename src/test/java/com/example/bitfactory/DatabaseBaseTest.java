@@ -7,8 +7,9 @@ import org.testcontainers.containers.MySQLContainer;
 
 public abstract class DatabaseBaseTest {
     @ClassRule
-    public static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:5.7")
-            .withInitScript("db/init.sql");
+    public static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0.16")
+            .withInitScript("mysql/init.mysql.sql");
+    //bit_factory?TC_INITSCRIPT=mysql/init.mysql.sql
 
     /**
      * 设置数据库连接属性

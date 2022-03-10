@@ -1,3 +1,4 @@
+/*
 package com.example.bitfactory.infrastructure.configuration;
 
 import lombok.Getter;
@@ -16,3 +17,4 @@ public class RedissonConfig {
         this.redisson = Redisson.create(config);
     }
 }
+*/

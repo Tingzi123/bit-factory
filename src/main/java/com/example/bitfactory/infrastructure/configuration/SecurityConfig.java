@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/login", "/my/logout");
+        web.ignoring().antMatchers("/login");
     }
 
     @Override
@@ -63,7 +63,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //after
 //                .addFilterBefore(new JwtLoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+                //3、addFilterBefore filter
                 .addFilterBefore(new JwtFilter(redisDao), UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable();
+
+        /*http
+                .formLogin();*/
     }
 }

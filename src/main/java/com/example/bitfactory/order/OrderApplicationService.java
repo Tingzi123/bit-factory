@@ -1,7 +1,6 @@
 package com.example.bitfactory.order;
 
 import com.example.bitfactory.infrastructure.configuration.RedisDao;
-import com.example.bitfactory.infrastructure.configuration.RedissonConfig;
 import com.example.bitfactory.infrastructure.exception.NotFoundException;
 import com.example.bitfactory.order.command.CreateOrderCommand;
 import com.example.bitfactory.order.command.UpdateOrderCommand;
@@ -9,8 +8,6 @@ import com.example.bitfactory.order.representation.OrderRepresentation;
 import com.example.bitfactory.order.representation.OrdersRepresentation;
 import com.example.bitfactory.product.ProductApplicationService;
 import com.example.bitfactory.product.representation.ProductRepresentation;
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,7 +19,6 @@ public class OrderApplicationService {
     private final OrderRepository orderRepository;
     private final ProductApplicationService productApplicationService;
     private final RedisDao redisDao;
-    private final RedissonClient redisson;
 
     public OrderApplicationService(OrderRepository orderRepository,
                                    ProductApplicationService productApplicationService,
@@ -30,19 +26,15 @@ public class OrderApplicationService {
         this.orderRepository = orderRepository;
         this.productApplicationService = productApplicationService;
         this.redisDao = redisDao;
-        this.redisson = new RedissonConfig().getRedisson();
     }
 
     @Transactional
     public void createOrder(CreateOrderCommand command) {
-        RLock lock = redisson.getLock("orderLock");
-        lock.lock();
         ProductRepresentation productRepresentation = productApplicationService.getProductById(command.getProductId());
-
-        var stockString = redisDao.getValue("PRODUCT:" + productRepresentation.getId());
+        var stockString = redisDao.getValue("PRODUCT:" + command.getProductId());
         Long stock;
         if (Objects.isNull(stockString)) {
-            redisDao.setKey("PRODUCT:" + productRepresentation.getId(), String.valueOf(productRepresentation.getStock()));
+            redisDao.setKey("PRODUCT:" + command.getProductId(), String.valueOf(productRepresentation.getStock()));
             stock = productRepresentation.getStock();
         } else {
             stock = Long.valueOf(stockString);
