@@ -1,21 +1,27 @@
 pipeline {
     agent any
+    triggers {
+            pollSCM("H/5 * * * *")
+    }
     stages {
-        stage('Build') {
+        stage('Test') {
             steps {
                 sh './gradlew clean build'
             }
         }
 
-        stage('Test') {
+        stage('Build') {
+            agent {
+                label 'docker-slave'
+            }
             steps {
-                sh './gradlew test'
+                sh './ci build'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo "Deploy!"
+                sh './ci deploy'
             }
         }
     }

@@ -1,0 +1,10 @@
+build() {
+  sudo docker build -t bitfactory:v1 .
+  sudo docker login -u "cctv" -p "123456"
+  sudo docker push bitfactory:v1
+}
+
+deploy() {
+  sudo docker pull bitfactory:v1
+  sudo docker run -d --name bitfactory -p 8080:8080
+}
