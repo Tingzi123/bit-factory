@@ -35,7 +35,6 @@ public class UserServiceTest {
 
     @Test
     public void login() {
-        userRepository.findByUsername("admin");
         User user = new User(1L, "cctv", "123", List.of(new Role("ADMIN", "admin")));
         when(userRepository.findByUsername(anyString())).thenReturn(Optional.of(user));
         String token = userService.login("cctv", "123");

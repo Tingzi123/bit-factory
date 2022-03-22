@@ -53,7 +53,7 @@ test {
     useJUnitPlatform()
 }
 
-task dockerStart(type: Exec) {
+/*task dockerStart(type: Exec) {
     workingDir "$projectDir"
     commandLine 'docker-compose', 'up'
 }
@@ -63,4 +63,4 @@ task localStart(type: Exec) {
     workingDir "$projectDir"
 //    commandLine 'sh', './local.sh'
     commandLine './gradlew', 'bootRun'
-}
+}*/
