@@ -1,0 +1,22 @@
+apiVersion: v1
+Kind: Deployment
+metadata:
+  name: bitfactory-deployment
+  labels:
+    app: bitfactory-deployment
+spec:
+  replicas: 2 #创建pod的个数
+  selector:
+    matchLabels:
+      app: bitfactory-deployment #满足标签为这个的时候相关的pod才能被调度
+  template:
+    metadata:
+      labels:
+        app: bitfactory
+  spec:
+    containers:
+      - name: bitfactory
+        image: 127.0.0.1:5000/bitfactory
+        imagePullPolicy: IfNotPresent
+        ports:
+            - containerPort: 8080

@@ -1,10 +1,13 @@
 build() {
-  sudo docker build -t bitfactory:v1 .
-  sudo docker login -u "cctv" -p "123456"
-  sudo docker push bitfactory:v1
+  sudo docker build -t 127.0.0.1:5000/bitfactory .
+  sudo docker push 127.0.0.1:5000/bitfactory
 }
 
 deploy() {
-  sudo docker pull bitfactory:v1
+  sudo docker pull 127.0.0.1:5000/bitfactory
   sudo docker run -d --name bitfactory -p 8080:8080
+}
+
+deploy_k8s() {
+  kubectl apply -f devops/k8s/app_deployment.yaml
 }
