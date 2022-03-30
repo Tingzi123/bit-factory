@@ -4,10 +4,6 @@ pipeline {
             pollSCM("H/5 * * * *")
     } */
     stages {
-        stage('Initialize'){
-            def dockerHome = tool 'myDocker'
-            env.PATH = "${dockerHome}/bin:${env.PATH}"
-        }
         stage('Test') {
             agent {
                 docker { image 'testcontainers/ryuk' }
