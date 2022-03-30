@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Test') {
             agent {
-                docker { image 'testcontainers/ryuk' }
+                docker image 'testcontainers/ryuk'
             }
             steps {
                 sh './gradlew clean build'
