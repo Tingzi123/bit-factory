@@ -5,18 +5,27 @@ pipeline {
     } */
     stages {
         stage('Test') {
+            agent {
+                label 'docker'
+            }
             steps {
                 sh './gradlew clean build'
             }
         }
 
         stage('Build') {
+            agent {
+                label 'docker'
+            }
             steps {
                 sh './ci build'
             }
         }
 
         stage('Deploy') {
+            agent {
+                label 'docker'
+            }
             steps {
                 sh './ci deploy'
             }
