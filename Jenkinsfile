@@ -16,8 +16,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Build!!"
-                sh 'docker build -t 127.0.0.1:5000/bitfactory .'
-                sh 'docker push 127.0.0.1:5000/bitfactory'
+                sh 'sudo docker build -t 127.0.0.1:5000/bitfactory .'
+                sh 'sudo docker push 127.0.0.1:5000/bitfactory'
 //                 sh './ci build'
             }
         }
