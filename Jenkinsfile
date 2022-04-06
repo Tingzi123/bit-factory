@@ -14,9 +14,6 @@ pipeline {
         } */
 
         stage('Build') {
-            agent {
-                label 'docker'
-            }
             steps {
                 sh './ci build'
             }
