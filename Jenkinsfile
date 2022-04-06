@@ -15,7 +15,10 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh './ci build'
+                echo "Build!!"
+                sh 'sudo docker build -t 127.0.0.1:5000/bitfactory .'
+                sh 'sudo docker push 127.0.0.1:5000/bitfactory'
+//                 sh './ci build'
             }
         }
 
@@ -24,7 +27,9 @@ pipeline {
                 label 'docker'
             }
             steps {
-                sh './ci deploy'
+                echo "Deploy!!"
+
+//                 sh './ci deploy'
             }
         }
     }
