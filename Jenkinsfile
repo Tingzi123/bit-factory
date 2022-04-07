@@ -4,14 +4,14 @@ pipeline {
             pollSCM("H/5 * * * *")
     } */
     stages {
-        /* stage('Test') {
+        stage('Test') {
             agent {
                 docker { image 'testcontainers/ryuk' }
             }
             steps {
                 sh './gradlew clean build'
             }
-        } */
+        }
 
         stage('Build') {
             steps {
