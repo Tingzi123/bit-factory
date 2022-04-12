@@ -12,8 +12,9 @@ pipeline {
                 docker { image 'testcontainers/ryuk' }
             }
             steps {
+//                 env.JAVA_HOME="${tool 'jdk11'}"
 //                 echo $JAVA_HOME
-                sh 'java -version'
+                sh '/Library/Java/JavaVirtualMachines/jdk-11.0.13.jdk/Contents/Home/bin/java -version'
                 sh './gradlew clean build'
             }
         }
