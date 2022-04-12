@@ -3,6 +3,9 @@ pipeline {
     /* triggers {
             pollSCM("H/5 * * * *")
     } */
+    tools {
+            jdk 'jdk11'
+        }
     stages {
         stage('Test') {
             agent {
