@@ -14,8 +14,8 @@ pipeline {
             steps {
 //                 env.JAVA_HOME="${tool 'jdk11'}"
 //                 echo $JAVA_HOME
-                sh 'lstttt /Users/tingchen'
-                sh '/Library/Java/JavaVirtualMachines/jdk-11.0.13.jdk/Contents/Home/bin/java -version'
+//                 sh 'lstttt /Users/tingchen'
+                sh '/usr/local/Cellar/openjdk@11/11.0.14.1/libexec/openjdk.jdk/Contents/Home/bin/java -version'
                 sh './gradlew clean build'
             }
         }
