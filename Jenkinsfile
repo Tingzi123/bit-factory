@@ -12,6 +12,8 @@ pipeline {
                 docker { image 'testcontainers/ryuk' }
             }
             steps {
+                echo $JAVA_HOME
+                sh 'java -version'
                 sh './gradlew clean build'
             }
         }
