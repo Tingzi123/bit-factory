@@ -17,6 +17,7 @@ pipeline {
 //                 sh 'lstttt /Users/tingchen'
 //                 sh "JAVA_HOME=/usr/local/Cellar/openjdk@11/11.0.14.1/libexec/openjdk.jdk/Contents/Home"
 //                 echo $JAVA_HOME
+                echo $PATH
                 sh 'java -version'
                 sh './gradlew clean build'
             }
