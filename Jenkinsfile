@@ -13,10 +13,10 @@ pipeline {
             }
             steps {
 //                 env.JAVA_HOME="${tool 'jdk11'}"
-                sh "which java"
+                sh 'which java'
                 echo env.JAVA_HOME
                 echo env.PATH
-                sh "java -version"
+                sh 'java -version'
                 sh './gradlew clean build'
             }
         }
