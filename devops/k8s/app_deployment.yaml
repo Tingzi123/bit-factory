@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bitfactory-deployment
@@ -12,9 +12,9 @@ spec:
     metadata:
       labels:
         app: bitfactory
-  spec:
-    containers:
-      - name: bitfactory
-        image: 127.0.0.1:5000/bitfactory
-        ports:
-          - containerPort: 80
+    spec:
+      containers:
+        - name: bitfactory
+          image: 127.0.0.1:5000/bitfactory
+          ports:
+            - containerPort: 8080

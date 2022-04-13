@@ -7,7 +7,8 @@ spec:
   selector:
     app: bitfactory
   clusterIP: 10.97.97.97 # service的ip地址，如果不写，默认会生成一个
-  type: ClusterIP
+  type: NodePort
   ports:
-    - port: 80  # Service端口
-      targetPort: 80 # pod端口
+    - protocol: TCP
+      port: 8080  # Service端口
+      nodePort: 32082
