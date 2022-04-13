@@ -1,5 +1,5 @@
 #准备JDK环境
-FROM java:11
+FROM adoptopenjdk/openjdk11
 
 #复制jar
 COPY build/libs/bitfactory-0.0.1-SNAPSHOT.jar bitfactory.jar
